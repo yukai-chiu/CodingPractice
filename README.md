@@ -1,2 +1,2 @@
 # LeetcodePractice
-my personal practice of Python coding
+My personal practice of Python coding
