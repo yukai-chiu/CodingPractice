@@ -1,3 +1,6 @@
+#Extra space
+#Time: O(n)
+#Space: O(n)
 class Solution:
     def sortedSquares(self, A: List[int]) -> List[int]:
         if not A:
