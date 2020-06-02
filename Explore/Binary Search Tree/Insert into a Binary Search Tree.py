@@ -30,4 +30,29 @@ class Solution:
         
         return root
             
-        
+#Iterative
+#Time:O(h)
+#Space: O(1)           
+class Solution:
+    def insertIntoBST(self, root: TreeNode, val: int) -> TreeNode:
+        if not root:
+            root = TreeNode(val)
+            return root
+ 
+        curr = root
+        while curr:
+            if curr.val > val:
+                if not curr.left:
+                    curr.left = TreeNode(val)
+                    return root
+                else:
+                    curr = curr.left
+
+            elif curr.val < val:
+                if not curr.right:
+                    curr.right = TreeNode(val)
+                    return root
+                else:
+                    curr = curr.right
+
+        return root
