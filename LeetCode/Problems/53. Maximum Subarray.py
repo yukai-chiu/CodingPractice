@@ -81,3 +81,21 @@ def largestSum(input):
             print("Add:",r,input[r], current_sum)
             l = r
             r+=1
+
+
+class Solution:
+    def maxSubArray(self, nums: List[int]) -> int:
+        #maintain a max_sum
+        #use dp to build up the solution
+        #at each index we store the max_sum of subarrays before it
+        #at any point, it will be simply dp[i-1] + nums[i] or nums[i] (we start a new subarray)
+        if not nums:
+            return None
+        
+        dp = [0] * len(nums)
+        dp[0] = nums[0]
+        max_sum = dp[0]
+        for i in range(1,len(nums)):
+            dp[i] = max(dp[i-1] + nums[i], nums[i])
+            max_sum = max(max_sum,dp[i])
+        return max_sum
