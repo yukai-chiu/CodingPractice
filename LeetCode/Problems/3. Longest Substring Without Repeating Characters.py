@@ -20,4 +20,26 @@ class Solution:
                 
         
         return max_count
-            
+
+#hash map
+#Time: O(n)
+#Space: O(n)
+class Solution:
+    def lengthOfLongestSubstring(self, s: str) -> int:
+        if not s:
+            return 0
+        
+        lookUp = {}
+        longest = 0
+        start = 0
+        for i,c in enumerate(s):
+            if c in lookUp:
+                #we only look at the current window, it could be smaller than start
+                start = max(start,lookUp[c]+1)
+                
+            longest = max(longest, i - start+1)  
+            #set to the latest
+            lookUp[c] = i
+        
+
+        return longest
