@@ -19,9 +19,23 @@ class Solution:
             nums[i] = 0
         
         
+#Time: O(n)
+#Space: O(1)        
+class Solution:
+    def moveZeroes(self, nums: List[int]) -> None:
+        """
+        Do not return anything, modify nums in-place instead.
+        """
+
+        if not nums:
+            return
+
+        nonzero = 0
+        for i in range(len(nums)):
+            if nums[i] != 0:
+                nums[nonzero] = nums[i]
+                nonzero+=1
         
-        
-        #two pointers
-        #one find the next zero, and one find the next non-zero to swap
-        #after swap, start from the non-zero pos to continue find the next zero
-        
+        for i in range(nonzero, len(nums)):
+            nums[i] = 0
+            
