@@ -99,3 +99,26 @@ class Solution:
             dp[i] = max(dp[i-1] + nums[i], nums[i])
             max_sum = max(max_sum,dp[i])
         return max_sum
+
+#follow up - two arrays
+if not nums:
+            return None
+        dp = [0] * len(nums)
+        dp[0] = nums[0]
+        for i in range(1,len(nums)):
+            dp[i] = max(dp[i-1] + nums[i], nums[i])
+        
+        dp_back = [0] * len(nums)
+        dp_back[-1] = nums[-1]
+        for i in range(len(nums)-2, -1, -1):
+            dp_back[i] = max(dp_back[i+1] + nums[i], nums[i])
+        for i in range(len(nums)-2, -1, -1):    
+            dp_back[i] = max(dp_back[i], dp_back[i+1])
+        for i in range(1,len(nums)):
+            dp[i] = max(dp[i-1] , dp[i])    
+            
+        print(dp, dp_back)
+        
+        for i in range(len(nums)-1):
+            print(dp[i]+dp_back[i+1])
+        return max(dp)

@@ -38,48 +38,28 @@ public:
 };
 
 
-
-//recursive
 class Solution {
 public:
-    bool hasPathSum(TreeNode* root, int sum) {
-        if(!root) return false;
-        
-        sum-=root->val;
-        if(sum==0 && !root->left && !root->right){
-            return true;
+    void findPath(TreeNode* node, vector<vector<int>>& paths, vector<int> path, int sum){
+        if(node==NULL){
+            return;
         }
-        return hasPathSum(root->left, sum) || hasPathSum(root->right, sum);
+        sum-= node->val;
+        path.push_back(node->val);
+        if(node->left == NULL && node->right == NULL && sum == 0){
+            paths.push_back(path);
+        }
+        
+        findPath(node->left, paths, path, sum);
+        findPath(node->right, paths, path, sum);
     }
-};
-
-
-//iterative
-class Solution {
-public:
-    bool hasPathSum(TreeNode* root, int sum) {
-        if(!root) return false;
-        stack<pair<TreeNode*, int>> s;
-        s.push({root,sum});
+    
+    
+    vector<vector<int>> pathSum(TreeNode* root, int sum) {
+        vector<vector<int>> paths;
         
-        while(!s.empty()){
-            TreeNode* node = s.top().first;
-            int curr_sum = s.top().second;
-            s.pop();
-            if(node==NULL){
-                continue;
-            }
-            curr_sum-= node->val;
-            
-            if(node->left == NULL && node->right == NULL){
-                if(curr_sum == 0) return true;
-            }
-            
-            s.push({node->left, curr_sum});
-            s.push({node->right, curr_sum});
-            
-        }
+        findPath(root, paths, {}, sum);
         
-       return false;
+        return paths;
     }
 };
