@@ -50,3 +50,24 @@ class Solution:
             else:
                 result.append(para)
         return result
+
+class Solution:
+    def generateParenthesis(self, n: int) -> List[str]:
+        if not n:
+            return []
+        
+        def generate_parenthesis(curr = "", left = 0, right = 0):
+            if len(curr) == 2*n:
+                result.append(curr)
+            
+            if left > right:
+                generate_parenthesis(curr + ")", left, right+1)
+            
+            if left < n:
+                generate_parenthesis(curr + "(", left+1, right)
+
+        result = []
+        generate_parenthesis()
+        
+        
+        return result
