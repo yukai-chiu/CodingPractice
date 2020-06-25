@@ -23,3 +23,30 @@ class Solution:
                 #print([start,end])
         
         return result
+
+
+
+class Solution:
+    def merge(self, intervals: List[List[int]]) -> List[List[int]]:
+
+        if not intervals:
+            return []
+        
+        intervals.sort()
+        start = intervals[0][0]
+        end = intervals[0][1]
+        result = []
+        
+        
+        for interval in intervals[1:]:
+            if interval[0] > end:
+                result.append([start,end])
+                start = interval[0]
+            end = max(end, interval[1])
+            #else:
+            #    end = interval[1]
+        if not result or start > result[-1][1]:
+            result.append([start,end])
+        
+        
+        return result

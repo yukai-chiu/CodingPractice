@@ -1,6 +1,6 @@
 #DFS
 #Time: O(n)
-#SpaceL O(n)
+#Space: O(n)
 class Solution:
     def dfs(self, node):
         if not node:
