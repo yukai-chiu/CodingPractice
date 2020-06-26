@@ -17,3 +17,23 @@ class Solution:
         
         self.dfs(nums, result, [] )
         return result
+
+
+class Solution:
+    def permutation(self, nums, result, curr, idx):
+        if idx == len(nums):
+            result.append(nums[:])
+            return
+            
+        for i in range(idx, len(nums)):
+            nums[idx], nums[i] = nums[i], nums[idx]
+            self.permutation(nums, result, curr, idx+1)
+            nums[idx], nums[i] = nums[i], nums[idx]
+    
+    def permute(self, nums: List[int]) -> List[List[int]]:
+        if not nums:
+            return []
+        result = []
+        self.permutation(nums, result, [], 0)
+        
+        return result
