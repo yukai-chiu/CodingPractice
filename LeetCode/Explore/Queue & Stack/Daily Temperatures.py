@@ -15,3 +15,23 @@ class Solution:
                 result[i] = stack[-1] - i
             stack.append(i)   
         return result
+
+
+class Solution:
+    def dailyTemperatures(self, T: List[int]) -> List[int]:
+        if not T:
+            return []
+        
+        stack = []
+        
+        result = [0] * len(T)
+        for i in range(len(T)-1, -1, -1):
+            
+            while stack and T[i] >= T[stack[-1]]:
+                stack.pop()
+            if stack:
+                result[i] = stack[-1]-i
+                
+            stack.append(i)
+            
+        return result
