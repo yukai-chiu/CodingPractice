@@ -1,6 +1,6 @@
 #Dynamic programming
 #Time: O(n*k^2)
-#Space: O(n)
+#Space: O(n*k)
 class Solution:
     def minCostII(self, costs: List[List[int]]) -> int:
         if not costs:
