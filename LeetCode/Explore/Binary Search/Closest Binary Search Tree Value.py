@@ -23,3 +23,22 @@ class Solution:
                 root = root.right
 
         return idx
+
+class Solution:
+    def closestValue(self, root: TreeNode, target: float) -> int:
+        if not root:
+            return -1
+        closest = float('inf')
+        ans = 0
+        
+        while root:
+            if abs(target - root.val) < closest:
+                closest = abs(target - root.val)
+                ans = root.val
+     
+            if target < root.val:
+                root = root.left
+            else:
+                root = root.right
+        
+        return ans
