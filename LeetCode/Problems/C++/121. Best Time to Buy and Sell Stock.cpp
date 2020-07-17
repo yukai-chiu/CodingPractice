@@ -13,3 +13,24 @@ public:
         
     }
 };
+
+
+class Solution {
+public:
+    int maxProfit(vector<int>& prices) {
+        if(!prices.size()) return 0;
+        
+        int low = INT_MAX;
+        int high = INT_MIN;
+        int maxprofit = 0;
+        for(int p:prices){
+            if(p < low) {
+                low = p;
+                high = p;
+            }
+            if(p > high) high = p;
+            maxprofit = std::max(maxprofit, high-low);
+        }
+        return maxprofit;
+    }
+};
