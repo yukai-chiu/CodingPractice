@@ -1,3 +1,29 @@
+#Time: O(n)
+#Space: O(k)
+class Solution:
+    def maxSlidingWindow(self, nums: List[int], k: int) -> List[int]:
+        #deque and tracked the largest seen with insert order
+        if not nums:
+            return []
+        
+        sliding_max = []
+        window = deque()
+        
+        for i in range(len(nums)):
+            #insert current element
+            while window and window[-1][1] < nums[i]:
+                window.pop()
+            #add current element
+            window.append((i, nums[i]))
+
+            #check out of range
+            while window and window[0][0] < i-k+1:
+                window.popleft()
+            if i >= k-1:
+                sliding_max.append(window[0][1])
+        return sliding_max
+
+
 class Solution:
     def maxSlidingWindow(self, nums: List[int], k: int) -> List[int]:
         #input check
