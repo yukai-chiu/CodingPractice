@@ -50,3 +50,59 @@ public:
         return result;
     }
 };
+
+
+
+class Solution {
+public:
+    bool canPlace(const int& row,const int& col, const int& n, const  vector<vector<bool>>& grid){
+      
+        for(int i=0;i<row;i++)    
+            if(grid[i][col] == true) return false;
+        
+        
+        for(int i=0;i<=max(col,row);i++){
+            if(col-i >=0 && row-i >=0 && grid[row-i][col-i] == true) return false;
+            if(col+i < n && row-i >=0 && grid[row-i][col+i] == true) return false;
+        }
+        
+        return true;
+        
+    }
+    bool placeQueen(int row, const int& n, vector<vector<bool>>& grid, int& count){
+        if(row == n) {
+            count++;
+            return true;
+        }
+        
+        for(int i=0;i<n;i++){
+            
+            if(canPlace(row,i, n, grid)){
+                //set to true
+                grid[row][i] = true;
+                //recursive
+                placeQueen(row+1, n, grid, count);
+                //backtrack
+                grid[row][i] = false;
+            }
+        }
+        return false;
+    }
+    int totalNQueens(int n) {
+        if(!n) return 0;
+        
+        
+        int count =0;
+        vector<vector<bool>> grid;
+        grid.resize(n);
+        for(int i=0;i<n;i++)
+            grid[i].resize(n);
+        
+        
+        placeQueen(0, n, grid, count);
+        
+        
+        return count;
+    }
+    
+};
