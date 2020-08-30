@@ -1,5 +1,96 @@
 class Solution {
 public:
+    void dfs(const int& i, const int& j, string& curr, vector<vector<int>>& grid, char state){
+        int M = grid.size();
+        int N = grid[0].size();
+        
+        if(i < 0 || i >= M || j < 0 || j >= N || grid[i][j] == 0)
+            return;
+        
+        grid[i][j] = 0;
+        curr.push_back(state);
+       
+        dfs(i+1,j, curr, grid, 'd');
+        dfs(i-1,j, curr, grid, 'u');
+        dfs(i,j+1, curr, grid, 'r');
+        dfs(i,j-1, curr, grid, 'l');
+        curr.push_back('e');
+        
+        
+    }
+    int numDistinctIslands(vector<vector<int>>& grid) {
+        if(!grid.size()) return 0;
+        
+        unordered_set<string> island;
+       
+        int M = grid.size();
+        int N = grid[0].size();
+        
+        for(int i=0;i<M;i++){
+            for(int j=0;j<N;j++){
+                if(grid[i][j] == 1){
+                    string curr;
+                    dfs(i, j, curr, grid, 's');
+                    island.insert(curr);
+                }
+            }
+        }
+        
+        
+        return island.size();
+        
+        
+    }
+};
+
+class Solution {
+public:
+    void dfs(const int& i, const int& j, string& curr, vector<vector<int>>& grid, string state){
+        int M = grid.size();
+        int N = grid[0].size();
+        
+        if(i < 0 || i >= M || j < 0 || j >= N || grid[i][j] == 0)
+            return;
+        
+        grid[i][j] = 0;
+        curr+=state;
+       
+        dfs(i+1,j, curr, grid, "d");
+        dfs(i-1,j, curr, grid, "u");
+        dfs(i,j+1, curr, grid, "r");
+        dfs(i,j-1, curr, grid, "l");
+        curr+='e';
+        
+        
+    }
+    int numDistinctIslands(vector<vector<int>>& grid) {
+        if(!grid.size()) return 0;
+        
+        unordered_set<string> island;
+       
+        int M = grid.size();
+        int N = grid[0].size();
+        
+        for(int i=0;i<M;i++){
+            for(int j=0;j<N;j++){
+                if(grid[i][j] == 1){
+                    string curr;
+                    dfs(i, j, curr, grid, "s");
+                    island.insert(curr);
+                }
+            }
+        }
+        
+        
+        return island.size();
+        
+        
+    }
+};
+
+
+class Solution {
+public:
     int dfs(vector<vector<int>>& grid, int i, int j, bool* visited, unordered_set<string>& island) {
         stack<pair<int, int>> dfs_stack;
         int M = grid.size();
